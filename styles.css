@@ -72,3 +72,16 @@ body {
 [data-col="2"] {
 	border-left: solid var(--border-width) var(--border-color);
 }
+
+.credit {
+	background: #496ddb;
+	padding: 0.5rem 1rem;
+	width: 90vw;
+	max-width: 500px;
+	border-radius: 1.5rem;
+	text-align: center;
+}
+
+.credit > a {
+	color: blue;
+}
