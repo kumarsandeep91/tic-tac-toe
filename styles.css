@@ -1,3 +1,74 @@
-html, body {
-    background: green;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:root {
+	--border-width: 3px;
+	--border-color: rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+	background: #ee8434;
+	color: #fff;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.root {
+	background: #f3f3f3;
+	color: #333333;
+	max-width: 500px;
+	min-height: 200px;
+	min-width: 200px;
+	padding: 2rem 1rem;
+	text-align: center;
+	width: 90vw;
+	border-radius: 1.5rem;
+}
+
+#board {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	justify-content: center;
+}
+.cell {
+	height: 4rem;
+	width: 4rem;
+	background-color: transparent;
+	border: none;
+	font-weight: 600;
+	font-size: 50px;
+}
+.cell::after {
+	content: attr(data-content);
+}
+[data-content="X"] {
+	color: palevioletred;
+}
+[data-content="O"] {
+	color: darkcyan;
+}
+
+[data-row="0"] {
+	border-bottom: solid var(--border-width) var(--border-color);
+}
+[data-row="2"] {
+	border-top: solid var(--border-width) var(--border-color);
+}
+[data-col="0"] {
+	border-right: solid var(--border-width) var(--border-color);
+}
+[data-col="2"] {
+	border-left: solid var(--border-width) var(--border-color);
 }
