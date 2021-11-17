@@ -63,6 +63,19 @@ const victories: Victory[] = [
     ],
 ]
 
+const musicBtn = document.getElementById("music");
+
+function createAudioPlayer(id: string, src: string) {
+    const audio = document.createElement("audio");
+    audio.id = id;
+    audio.src = src;
+
+    return audio;
+}
+
+const playerMoveAudioPlayer = createAudioPlayer("player-move", "sounds/player-move.wav");
+const resetBtnAudioPlayer = createAudioPlayer("reset-board", "sounds/reset.wav");
+
 function checkBoard(): "X" | "O" | "Draw" | "" {
     for (const victory of victories) {
         const cell1 = boardState[victory[0][0]][victory[0][1]];
@@ -103,7 +116,10 @@ function createCell(row: number, col:number, content: Cell = "") {
     if(boardState[row][col] === "") {
         boardState[row][col] = currentMove;
         currentMove = currentMove === "X" ? "O" : "X";
-
+        const music = musicBtn.dataset.music;
+        if (music !== "mute") {
+            playerMoveAudioPlayer.play();
+        }
         winner = checkBoard();
         renderBoard();
     }
@@ -137,6 +153,10 @@ function init() {
   const resetButton = document.getElementById("reset");
   if (!resetButton) throw new Error("No Reset button");
   resetButton.addEventListener("click", () => {
+    const music = musicBtn.dataset.music;
+    if (music !== "mute") {
+        resetBtnAudioPlayer.play();
+    }
     boardState = [
       ["", "", ""],
       ["", "", ""],
@@ -166,15 +186,13 @@ toggleThemeBtn.addEventListener("click", () => {
 });
 
 // mute-unmute the sound
-const musicBtn = document.getElementById("music");
 musicBtn.addEventListener("click", () => {
     const music = musicBtn.dataset.music;
-
-    if (music === "play") {
+    if (music === "unmute") {
         musicBtn.innerHTML = "&#128263;";
-        musicBtn.dataset.music = "pause";
+        musicBtn.dataset.music = "mute";
     } else {
         musicBtn.innerHTML = "&#128266;";
-        musicBtn.dataset.music = "play";
+        musicBtn.dataset.music = "unmute";
     }
 });
