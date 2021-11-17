@@ -132,4 +132,31 @@ function init() {
     });
     renderBoard();
 }
+// initialize the game
 init();
+// add event listner on theme toggle button
+var toggleThemeBtn = document.getElementById("theme-mode");
+toggleThemeBtn.addEventListener("click", function () {
+    var theme = document.body.dataset.theme;
+    if (theme === "light") {
+        document.body.dataset.theme = "dark";
+        toggleThemeBtn.innerHTML = "&#127762;";
+    }
+    else {
+        document.body.dataset.theme = "light";
+        toggleThemeBtn.innerHTML = "&#127766;";
+    }
+});
+// mute-unmute the sound
+var musicBtn = document.getElementById("music");
+musicBtn.addEventListener("click", function () {
+    var music = musicBtn.dataset.music;
+    if (music === "play") {
+        musicBtn.innerHTML = "&#128263;";
+        musicBtn.dataset.music = "pause";
+    }
+    else {
+        musicBtn.innerHTML = "&#128266;";
+        musicBtn.dataset.music = "play";
+    }
+});
